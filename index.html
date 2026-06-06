@@ -253,9 +253,8 @@
     function renderCatalog(products) {
       productCount.textContent = products.length;
       barcodeCount.textContent = products.filter(function(product) {
-        return product.barcode;
+      return product.barcode && product.barcode.trim() !== "";
       }).length;
-
       if (!products.length) {
         catalogSections.innerHTML = '<div class="empty-catalog">No products found.</div>';
         return;
