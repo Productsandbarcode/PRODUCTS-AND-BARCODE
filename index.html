@@ -100,63 +100,16 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-    const exampleProducts = (window.SAMPLE_PRODUCTS || [
-      ["Apple AirPods Pro", "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQD83?wid=572&hei=572&fmt=jpeg&qlt=95&.v=1660803972361", "111000111001", "Electronics"],
-      ["Logitech Wireless Mouse", "https://resource.logitech.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/mice/m185/gallery/m185-grey-top-view.png?v=1", "111000111002", "Electronics"],
-      ["JBL Bluetooth Speaker", "https://www.pngmart.com/files/22/JBL-Speaker-PNG-Isolated-File.png", "111000111003", "Electronics"],
-      ["Samsung Galaxy Earbuds", "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=700&q=80", "111000111004", "Electronics"],
-      ["USB-C Fast Charger", "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=700&q=80", "111000111005", "Electronics"],
-      ["Smart Watch", "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80", "111000111006", "Electronics"],
-      ["Portable Power Bank", "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=700&q=80", "111000111007", "Electronics"],
-      ["Oreo Biscuit", "https://upload.wikimedia.org/wikipedia/commons/4/4e/Oreo-Two-Cookies.png", "222000222001", "Supermarket"],
-      ["Nutella Hazelnut Spread", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Nutella.jpg/640px-Nutella.jpg", "222000222002", "Supermarket"],
-      ["Pringles Chips", "https://m.media-amazon.com/images/I/71VZ8p8EneL.jpg", "222000222003", "Supermarket"],
-      ["Corn Flakes", "https://images.unsplash.com/photo-1624798911782-f3766deb4aec?auto=format&fit=crop&w=700&q=80", "222000222004", "Supermarket"],
-      ["Pasta Spaghetti", "https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&w=700&q=80", "222000222005", "Supermarket"],
-      ["Tomato Ketchup", "https://images.unsplash.com/photo-1626200424577-771e9ef57990?auto=format&fit=crop&w=700&q=80", "222000222006", "Supermarket"],
-      ["Chocolate Bar", "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=700&q=80", "222000222007", "Supermarket"],
-      ["Fresh Milk", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Milk_glass.jpg/640px-Milk_glass.jpg", "333000333001", "Fresh Food"],
-      ["Red Apples", "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg", "333000333002", "Fresh Food"],
-      ["Bananas", "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg", "333000333003", "Fresh Food"],
-      ["Fresh Eggs", "https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=700&q=80", "333000333004", "Fresh Food"],
-      ["Cherry Tomatoes", "https://images.unsplash.com/photo-1561136594-7f68413baa99?auto=format&fit=crop&w=700&q=80", "333000333005", "Fresh Food"],
-      ["Whole Wheat Bread", "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80", "333000333006", "Fresh Food"],
-      ["Fresh Lettuce", "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?auto=format&fit=crop&w=700&q=80", "333000333007", "Fresh Food"],
-      ["Coca Cola", "https://upload.wikimedia.org/wikipedia/commons/3/36/Coca-Cola_can_2015.png", "444000444001", "Drinks"],
-      ["Pepsi", "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pepsi_can_2023.png", "444000444002", "Drinks"],
-      ["Orange Juice", "https://upload.wikimedia.org/wikipedia/commons/c/cd/Orange_juice_1.jpg", "444000444003", "Drinks"],
-      ["Mineral Water", "https://images.unsplash.com/photo-1564419320461-6870880221ad?auto=format&fit=crop&w=700&q=80", "444000444004", "Drinks"],
-      ["Iced Coffee", "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80", "444000444005", "Drinks"],
-      ["Green Tea", "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=700&q=80", "444000444006", "Drinks"],
-      ["Energy Drink", "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?auto=format&fit=crop&w=700&q=80", "444000444007", "Drinks"],
-      ["Nivea Body Lotion", "https://m.media-amazon.com/images/I/61zW6V3xX5L.jpg", "555000555001", "Beauty"],
-      ["Dove Soap", "https://m.media-amazon.com/images/I/71b+S7LSdJL.jpg", "555000555002", "Beauty"],
-      ["L'Oreal Shampoo", "https://m.media-amazon.com/images/I/61j8ikf2l5L.jpg", "555000555003", "Beauty"],
-      ["Face Moisturizer", "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=80", "555000555004", "Beauty"],
-      ["Sunscreen SPF 50", "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80", "555000555005", "Beauty"],
-      ["Lip Balm", "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=80", "555000555006", "Beauty"],
-      ["Hand Cream", "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=700&q=80", "555000555007", "Beauty"],
-      ["Dishwashing Liquid", "https://m.media-amazon.com/images/I/61W7c8Qqh-L.jpg", "666000666001", "Home Essentials"],
-      ["Kitchen Towels", "https://m.media-amazon.com/images/I/71N+W4V9hXL.jpg", "666000666002", "Home Essentials"],
-      ["Air Freshener", "https://m.media-amazon.com/images/I/61k5Vj0vD1L.jpg", "666000666003", "Home Essentials"],
-      ["Laundry Detergent", "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=700&q=80", "666000666004", "Home Essentials"],
-      ["Toilet Paper", "https://images.unsplash.com/photo-1584556812952-905ffd0c611a?auto=format&fit=crop&w=700&q=80", "666000666005", "Home Essentials"],
-      ["Cleaning Spray", "https://images.unsplash.com/photo-1585421514738-01798e348b17?auto=format&fit=crop&w=700&q=80", "666000666006", "Home Essentials"],
-      ["Storage Basket", "https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=700&q=80", "666000666007", "Home Essentials"]
-    ]).map(function(item) {
-      if (!Array.isArray(item)) {
-        return {
-          name: item.name,
-          image: item.image,
-          barcode: item.barcode,
-          category: item.category,
-          link: item.link || "https://amazon.com",
-          views: Number(item.views || 0)
-        };
-      }
-
-      return { name: item[0], image: item[1], barcode: item[2], category: item[3], link: "https://amazon.com", views: 0 };
-    });
+    const exampleProducts = (window.SAMPLE_PRODUCTS || []).map(function(item) {
+  return {
+    name: item.name,
+    image: item.image,
+    barcode: item.barcode,
+    category: item.category,
+    link: item.link || "https://amazon.com",
+    views: Number(item.views || 0)
+  };
+});
 
     const catalogSections = document.getElementById("catalogSections");
     const searchInput = document.getElementById("searchInput");
