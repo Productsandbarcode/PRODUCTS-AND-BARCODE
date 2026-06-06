@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Products</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="corner-menu">
+    <button id="menuToggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="quickMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div id="quickMenu" class="quick-menu" hidden>
+      <button id="darkModeBtn" type="button">Dark Mode</button>
+      <button id="lightModeBtn" type="button">Light Mode</button>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="brand">Products</div>
+  </header>
+
+  <main class="main">
+    <section class="products-hero reveal">
+      <div class="hero-copy">
+        <span class="hero-badge">Product Catalog</span>
+        <h1>Explore products by category, name, or barcode</h1>
+        <p>Browse electronics, supermarket items, fresh food, drinks, beauty, and home essentials in one focused products page.</p>
+      </div>
+
+      <div class="catalog-summary" aria-label="Catalog summary">
+        <div class="summary-card">
+          <strong id="productCount">0</strong>
+          <span>Products</span>
+        </div>
+        <div class="summary-card">
+          <strong id="barcodeCount">0</strong>
+          <span>Barcodes</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="products-toolbar reveal-delay" aria-label="Product filters">
+      <div class="search-box">
+        <label class="sr-only" for="searchInput">Search products</label>
+        <input type="search" id="searchInput" placeholder="Search products or barcode" autocomplete="off" />
+      </div>
+
+      <div class="category-nav" aria-label="Categories">
+        <button class="category-pill active" data-category="All" type="button">All</button>
+        <button class="category-pill" data-category="Electronics" type="button">Electronics</button>
+        <button class="category-pill" data-category="Supermarket" type="button">Supermarket</button>
+        <button class="category-pill" data-category="Fresh Food" type="button">Fresh Food</button>
+        <button class="category-pill" data-category="Drinks" type="button">Drinks</button>
+        <button class="category-pill" data-category="Beauty" type="button">Beauty</button>
+        <button class="category-pill" data-category="Home Essentials" type="button">Home Essentials</button>
+      </div>
+    </section>
+
+    <section id="catalogSections" class="catalog-sections reveal" aria-live="polite">
+      <div class="empty-catalog">Loading products...</div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; 2026 Products. All rights reserved.</span>
+  </footer>
+
+  <div id="buyModal" class="buy-modal" hidden>
+    <div class="buy-modal-backdrop" data-close-buy></div>
+    <section class="buy-dialog" role="dialog" aria-modal="true" aria-labelledby="buyModalTitle">
+      <button class="buy-close" type="button" aria-label="Close buying options" data-close-buy>&times;</button>
+      <span class="hero-badge" id="detectedMarket">Buying options</span>
+      <h2 id="buyModalTitle">Choose where to buy</h2>
+      <p id="buyModalProduct"></p>
+      <div id="buyOptions" class="buy-options"></div>
+    </section>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="products-data.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDz9DxN0mLSpn_6A-opMeIEAEG4cIDk8OQ",
+      authDomain: "productsandbarcode.firebaseapp.com",
+      projectId: "productsandbarcode",
+      storageBucket: "productsandbarcode.firebasestorage.app",
+      messagingSenderId: "809301561294",
+      appId: "1:809301561294:web:d61d4820d9961f84cba59f",
+      measurementId: "G-MG7V865BE6"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    const exampleProducts = (window.SAMPLE_PRODUCTS || [
+      ["Apple AirPods Pro", "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQD83?wid=572&hei=572&fmt=jpeg&qlt=95&.v=1660803972361", "111000111001", "Electronics"],
+      ["Logitech Wireless Mouse", "https://resource.logitech.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/mice/m185/gallery/m185-grey-top-view.png?v=1", "111000111002", "Electronics"],
+      ["JBL Bluetooth Speaker", "https://www.pngmart.com/files/22/JBL-Speaker-PNG-Isolated-File.png", "111000111003", "Electronics"],
+      ["Samsung Galaxy Earbuds", "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=700&q=80", "111000111004", "Electronics"],
+      ["USB-C Fast Charger", "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=700&q=80", "111000111005", "Electronics"],
+      ["Smart Watch", "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80", "111000111006", "Electronics"],
+      ["Portable Power Bank", "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=700&q=80", "111000111007", "Electronics"],
+      ["Oreo Biscuit", "https://upload.wikimedia.org/wikipedia/commons/4/4e/Oreo-Two-Cookies.png", "222000222001", "Supermarket"],
+      ["Nutella Hazelnut Spread", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Nutella.jpg/640px-Nutella.jpg", "222000222002", "Supermarket"],
+      ["Pringles Chips", "https://m.media-amazon.com/images/I/71VZ8p8EneL.jpg", "222000222003", "Supermarket"],
+      ["Corn Flakes", "https://images.unsplash.com/photo-1624798911782-f3766deb4aec?auto=format&fit=crop&w=700&q=80", "222000222004", "Supermarket"],
+      ["Pasta Spaghetti", "https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&w=700&q=80", "222000222005", "Supermarket"],
+      ["Tomato Ketchup", "https://images.unsplash.com/photo-1626200424577-771e9ef57990?auto=format&fit=crop&w=700&q=80", "222000222006", "Supermarket"],
+      ["Chocolate Bar", "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=700&q=80", "222000222007", "Supermarket"],
+      ["Fresh Milk", "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Milk_glass.jpg/640px-Milk_glass.jpg", "333000333001", "Fresh Food"],
+      ["Red Apples", "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg", "333000333002", "Fresh Food"],
+      ["Bananas", "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg", "333000333003", "Fresh Food"],
+      ["Fresh Eggs", "https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=700&q=80", "333000333004", "Fresh Food"],
+      ["Cherry Tomatoes", "https://images.unsplash.com/photo-1561136594-7f68413baa99?auto=format&fit=crop&w=700&q=80", "333000333005", "Fresh Food"],
+      ["Whole Wheat Bread", "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80", "333000333006", "Fresh Food"],
+      ["Fresh Lettuce", "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?auto=format&fit=crop&w=700&q=80", "333000333007", "Fresh Food"],
+      ["Coca Cola", "https://upload.wikimedia.org/wikipedia/commons/3/36/Coca-Cola_can_2015.png", "444000444001", "Drinks"],
+      ["Pepsi", "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pepsi_can_2023.png", "444000444002", "Drinks"],
+      ["Orange Juice", "https://upload.wikimedia.org/wikipedia/commons/c/cd/Orange_juice_1.jpg", "444000444003", "Drinks"],
+      ["Mineral Water", "https://images.unsplash.com/photo-1564419320461-6870880221ad?auto=format&fit=crop&w=700&q=80", "444000444004", "Drinks"],
+      ["Iced Coffee", "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80", "444000444005", "Drinks"],
+      ["Green Tea", "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=700&q=80", "444000444006", "Drinks"],
+      ["Energy Drink", "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?auto=format&fit=crop&w=700&q=80", "444000444007", "Drinks"],
+      ["Nivea Body Lotion", "https://m.media-amazon.com/images/I/61zW6V3xX5L.jpg", "555000555001", "Beauty"],
+      ["Dove Soap", "https://m.media-amazon.com/images/I/71b+S7LSdJL.jpg", "555000555002", "Beauty"],
+      ["L'Oreal Shampoo", "https://m.media-amazon.com/images/I/61j8ikf2l5L.jpg", "555000555003", "Beauty"],
+      ["Face Moisturizer", "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=80", "555000555004", "Beauty"],
+      ["Sunscreen SPF 50", "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80", "555000555005", "Beauty"],
+      ["Lip Balm", "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=80", "555000555006", "Beauty"],
+      ["Hand Cream", "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=700&q=80", "555000555007", "Beauty"],
+      ["Dishwashing Liquid", "https://m.media-amazon.com/images/I/61W7c8Qqh-L.jpg", "666000666001", "Home Essentials"],
+      ["Kitchen Towels", "https://m.media-amazon.com/images/I/71N+W4V9hXL.jpg", "666000666002", "Home Essentials"],
+      ["Air Freshener", "https://m.media-amazon.com/images/I/61k5Vj0vD1L.jpg", "666000666003", "Home Essentials"],
+      ["Laundry Detergent", "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=700&q=80", "666000666004", "Home Essentials"],
+      ["Toilet Paper", "https://images.unsplash.com/photo-1584556812952-905ffd0c611a?auto=format&fit=crop&w=700&q=80", "666000666005", "Home Essentials"],
+      ["Cleaning Spray", "https://images.unsplash.com/photo-1585421514738-01798e348b17?auto=format&fit=crop&w=700&q=80", "666000666006", "Home Essentials"],
+      ["Storage Basket", "https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=700&q=80", "666000666007", "Home Essentials"]
+    ]).map(function(item) {
+      if (!Array.isArray(item)) {
+        return {
+          name: item.name,
+          image: item.image,
+          barcode: item.barcode,
+          category: item.category,
+          link: item.link || "https://amazon.com",
+          views: Number(item.views || 0)
+        };
+      }
+
+      return { name: item[0], image: item[1], barcode: item[2], category: item[3], link: "https://amazon.com", views: 0 };
+    });
+
+    const catalogSections = document.getElementById("catalogSections");
+    const searchInput = document.getElementById("searchInput");
+    const productCount = document.getElementById("productCount");
+    const barcodeCount = document.getElementById("barcodeCount");
+    const categoryButtons = document.querySelectorAll(".category-pill");
+    const menuToggle = document.getElementById("menuToggle");
+    const quickMenu = document.getElementById("quickMenu");
+    const darkModeBtn = document.getElementById("darkModeBtn");
+    const lightModeBtn = document.getElementById("lightModeBtn");
+    const buyModal = document.getElementById("buyModal");
+    const buyModalProduct = document.getElementById("buyModalProduct");
+    const buyOptions = document.getElementById("buyOptions");
+    const detectedMarket = document.getElementById("detectedMarket");
+
+    let firestoreProducts = [];
+    let selectedCategory = "All";
+
+    function escapeHtml(text) {
+      const div = document.createElement("div");
+      div.textContent = text || "";
+      return div.innerHTML;
+    }
+
+    function applySavedTheme() {
+      const savedTheme = localStorage.getItem("theme") || "dark";
+      document.documentElement.dataset.theme = savedTheme;
+      darkModeBtn.classList.toggle("active", savedTheme === "dark");
+      lightModeBtn.classList.toggle("active", savedTheme === "light");
+    }
+
+    function closeMenu() {
+      quickMenu.hidden = true;
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+
+    function setTheme(theme) {
+      localStorage.setItem("theme", theme);
+      applySavedTheme();
+      closeMenu();
+    }
+
+    function getClientMarket() {
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+      const language = navigator.language || "";
+
+      if (timezone === "Asia/Kolkata" || language.toLowerCase().includes("-in")) {
+        return {
+          label: "Detected market: India",
+          options: [
+            { name: "Amazon.in", url: "https://www.amazon.in/s?k=" },
+            { name: "Flipkart", url: "https://www.flipkart.com/search?q=" }
+          ]
+        };
+      }
+
+      if (timezone === "Asia/Riyadh" || language.toLowerCase().includes("-sa")) {
+        return {
+          label: "Detected market: Saudi Arabia",
+          options: [
+            { name: "Amazon.sa", url: "https://www.amazon.sa/s?k=" },
+            { name: "Noon", url: "https://www.noon.com/saudi-en/search/?q=" }
+          ]
+        };
+      }
+
+      return {
+        label: "Buying options",
+        options: [
+          { name: "Amazon", url: "https://www.amazon.com/s?k=" },
+          { name: "eBay", url: "https://www.ebay.com/sch/i.html?_nkw=" }
+        ]
+      };
+    }
+
+    function getBuyOptions(productName) {
+      const market = getClientMarket();
+      const globalOptions = [
+        { name: "Alibaba", url: "https://www.alibaba.com/trade/search?SearchText=" },
+        { name: "AliExpress", url: "https://www.aliexpress.com/wholesale?SearchText=" }
+      ];
+
+      return {
+        label: market.label,
+        links: market.options.concat(globalOptions).map(function(option) {
+          return {
+            name: option.name,
+            url: option.url + encodeURIComponent(productName)
+          };
+        })
+      };
+    }
+
+    function openBuyModal(productName) {
+      const market = getBuyOptions(productName);
+      detectedMarket.textContent = market.label;
+      buyModalProduct.textContent = productName;
+      buyOptions.innerHTML = market.links.map(function(option) {
+        const marketId = option.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        const icons = {
+          "amazon-in": "https://www.google.com/s2/favicons?domain=amazon.in&sz=64",
+          "amazon-sa": "https://www.google.com/s2/favicons?domain=amazon.sa&sz=64",
+          "amazon": "https://www.google.com/s2/favicons?domain=amazon.com&sz=64",
+          "flipkart": "https://www.google.com/s2/favicons?domain=flipkart.com&sz=64",
+          "noon": "https://www.google.com/s2/favicons?domain=noon.com&sz=64",
+          "alibaba": "https://www.google.com/s2/favicons?domain=alibaba.com&sz=64",
+          "aliexpress": "https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64",
+          "ebay": "https://www.google.com/s2/favicons?domain=ebay.com&sz=64"
+        };
+        return `<a class="market-link" data-market="${escapeHtml(marketId)}" href="${option.url}" target="_blank" rel="noopener noreferrer"><span class="market-icon" aria-hidden="true"><img src="${escapeHtml(icons[marketId])}" alt="" loading="lazy" /></span><span class="market-copy"><strong>${escapeHtml(option.name)}</strong><small>Search this product</small></span></a>`;
+      }).join("");
+      buyModal.hidden = false;
+    }
+
+    function closeBuyModal() {
+      buyModal.hidden = true;
+    }
+
+    function getMergedProducts() {
+      const existingKeys = new Set(
+        firestoreProducts.map(function(product) {
+          return (product.name || "").toLowerCase() + "|" + (product.barcode || "").toLowerCase();
+        })
+      );
+
+      return firestoreProducts.concat(exampleProducts.filter(function(product) {
+        const key = (product.name || "").toLowerCase() + "|" + (product.barcode || "").toLowerCase();
+        return !existingKeys.has(key);
+      }));
+    }
+
+    function groupProducts(products) {
+      return products.reduce(function(grouped, product) {
+        const category = product.category || "Other";
+        if (!grouped[category]) grouped[category] = [];
+        grouped[category].push(product);
+        return grouped;
+      }, {});
+    }
+
+    function renderCatalog(products) {
+      productCount.textContent = products.length;
+      barcodeCount.textContent = products.filter(function(product) {
+        return product.barcode;
+      }).length;
+
+      if (!products.length) {
+        catalogSections.innerHTML = '<div class="empty-catalog">No products found.</div>';
+        return;
+      }
+
+      const grouped = groupProducts(products);
+      const categoryOrder = ["Electronics", "Supermarket", "Fresh Food", "Drinks", "Beauty", "Home Essentials", "Other"];
+
+      catalogSections.innerHTML = categoryOrder
+        .filter(function(category) {
+          return grouped[category] && grouped[category].length;
+        })
+        .map(function(category) {
+          return `
+            <section class="catalog-block">
+              <div class="catalog-block-head">
+                <h2>${escapeHtml(category)}</h2>
+                <span>${grouped[category].length} items</span>
+              </div>
+              <div class="products-grid">
+                ${grouped[category].map(function(product) {
+                  const isLiveProduct = Boolean(product.id);
+                  return `
+                    <article class="product-card">
+                      <a class="product-image" href="${escapeHtml(product.link)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(product.name)}">
+                        <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" />
+                      </a>
+                      <div class="product-body">
+                        <span class="tag">${escapeHtml(product.category || "Product")}</span>
+                        <h3>${escapeHtml(product.name)}</h3>
+                        <dl class="product-meta">
+                          <div><dt>Barcode</dt><dd>${escapeHtml(product.barcode)}</dd></div>
+                          <div><dt>Views</dt><dd>${Number(product.views || 0)}</dd></div>
+                        </dl>
+                        ${isLiveProduct
+                          ? `<button class="btn-primary buy-btn" data-id="${product.id}" data-name="${escapeHtml(product.name)}" type="button">Buy Now</button>`
+                          : `<button class="btn-primary buy-btn" data-name="${escapeHtml(product.name)}" type="button">Buy Now</button>`}
+                      </div>
+                    </article>
+                  `;
+                }).join("")}
+              </div>
+            </section>
+          `;
+        }).join("");
+
+      attachBuyEvents();
+    }
+
+    function attachBuyEvents() {
+      document.querySelectorAll(".buy-btn").forEach(function(button) {
+        button.addEventListener("click", async function() {
+          const productId = button.getAttribute("data-id");
+          const productName = button.getAttribute("data-name");
+
+          button.disabled = true;
+          button.textContent = "Loading...";
+
+          if (productId) {
+            try {
+              const productRef = db.collection("products").doc(productId);
+              await db.runTransaction(async function(transaction) {
+                const doc = await transaction.get(productRef);
+                if (!doc.exists) return;
+                transaction.update(productRef, { views: Number(doc.data().views || 0) + 1 });
+              });
+            } catch (error) {
+              console.error(error);
+            }
+          }
+
+          openBuyModal(productName);
+          button.disabled = false;
+          button.textContent = "Buy Now";
+        });
+      });
+    }
+
+    function applyFilters() {
+      const query = searchInput.value.trim().toLowerCase();
+      let products = getMergedProducts();
+
+      if (selectedCategory !== "All") {
+        products = products.filter(function(product) {
+          return (product.category || "").toLowerCase() === selectedCategory.toLowerCase();
+        });
+      }
+
+      if (query) {
+        products = products.filter(function(product) {
+          const name = (product.name || "").toLowerCase();
+          const barcode = (product.barcode || "").toLowerCase();
+          const category = (product.category || "").toLowerCase();
+          return name.includes(query) || barcode.includes(query) || category.includes(query);
+        });
+      }
+
+      renderCatalog(products);
+    }
+
+    menuToggle.addEventListener("click", function() {
+      const isOpen = quickMenu.hidden;
+      quickMenu.hidden = !isOpen;
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    darkModeBtn.addEventListener("click", function() {
+      setTheme("dark");
+    });
+
+    lightModeBtn.addEventListener("click", function() {
+      setTheme("light");
+    });
+
+    document.addEventListener("click", function(event) {
+      if (!event.target.closest(".corner-menu")) closeMenu();
+    });
+
+    document.querySelectorAll("[data-close-buy]").forEach(function(button) {
+      button.addEventListener("click", closeBuyModal);
+    });
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        closeMenu();
+        closeBuyModal();
+      }
+    });
+
+    categoryButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        categoryButtons.forEach(function(btn) {
+          btn.classList.remove("active");
+        });
+        button.classList.add("active");
+        selectedCategory = button.getAttribute("data-category");
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener("input", applyFilters);
+
+    db.collection("products").onSnapshot(function(snapshot) {
+      firestoreProducts = snapshot.docs.map(function(doc) {
+        return { id: doc.id, ...doc.data() };
+      });
+      applyFilters();
+    }, function(error) {
+      console.error(error);
+      applyFilters();
+    });
+
+    const revealItems = document.querySelectorAll(".reveal, .reveal-delay");
+    const revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) entry.target.classList.add("visible");
+      });
+    }, { threshold: 0.16 });
+
+    applySavedTheme();
+    revealItems.forEach(function(item) {
+      revealObserver.observe(item);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+// Add new products here. Use category names already shown on the page.
+// Example: { name: "Product Name", image: "https://image-url", barcode: "123456789", category: "Electronics" },
+window.SAMPLE_PRODUCTS = [
+  { name: "Apple AirPods Pro", image: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQD83?wid=572&hei=572&fmt=jpeg&qlt=95&.v=1660803972361", barcode: "111000111001", category: "Electronics" },
+  { name: "Logitech Wireless Mouse", image: "https://resource.logitech.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/mice/m185/gallery/m185-grey-top-view.png?v=1", barcode: "111000111002", category: "Electronics" },
+  { name: "JBL Bluetooth Speaker", image: "https://www.pngmart.com/files/22/JBL-Speaker-PNG-Isolated-File.png", barcode: "111000111003", category: "Electronics" },
+  { name: "Samsung Galaxy Earbuds", image: "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=700&q=80", barcode: "111000111004", category: "Electronics" },
+  { name: "USB-C Fast Charger", image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=700&q=80", barcode: "111000111005", category: "Electronics" },
+  { name: "Smart Watch", image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=700&q=80", barcode: "111000111006", category: "Electronics" },
+  { name: "Portable Power Bank", image: "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?auto=format&fit=crop&w=700&q=80", barcode: "111000111007", category: "Electronics" },
+
+  { name: "Oreo Biscuit", image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Oreo-Two-Cookies.png", barcode: "222000222001", category: "Supermarket" },
+  { name: "Nutella Hazelnut Spread", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Nutella.jpg/640px-Nutella.jpg", barcode: "222000222002", category: "Supermarket" },
+  { name: "Pringles Chips", image: "https://m.media-amazon.com/images/I/71VZ8p8EneL.jpg", barcode: "222000222003", category: "Supermarket" },
+  { name: "Corn Flakes", image: "https://images.unsplash.com/photo-1624798911782-f3766deb4aec?auto=format&fit=crop&w=700&q=80", barcode: "222000222004", category: "Supermarket" },
+  { name: "Pasta Spaghetti", image: "https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&w=700&q=80", barcode: "222000222005", category: "Supermarket" },
+  { name: "Tomato Ketchup", image: "https://images.unsplash.com/photo-1626200424577-771e9ef57990?auto=format&fit=crop&w=700&q=80", barcode: "222000222006", category: "Supermarket" },
+  { name: "Chocolate Bar", image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?auto=format&fit=crop&w=700&q=80", barcode: "222000222007", category: "Supermarket" },
+
+  { name: "Fresh Milk", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Milk_glass.jpg/640px-Milk_glass.jpg", barcode: "333000333001", category: "Fresh Food" },
+  { name: "Red Apples", image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg", barcode: "333000333002", category: "Fresh Food" },
+  { name: "Bananas", image: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg", barcode: "333000333003", category: "Fresh Food" },
+  { name: "Fresh Eggs", image: "https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=700&q=80", barcode: "333000333004", category: "Fresh Food" },
+  { name: "Cherry Tomatoes", image: "https://images.unsplash.com/photo-1561136594-7f68413baa99?auto=format&fit=crop&w=700&q=80", barcode: "333000333005", category: "Fresh Food" },
+  { name: "Whole Wheat Bread", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80", barcode: "333000333006", category: "Fresh Food" },
+  { name: "Fresh Lettuce", image: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?auto=format&fit=crop&w=700&q=80", barcode: "333000333007", category: "Fresh Food" },
+
+  { name: "Coca Cola", image: "https://upload.wikimedia.org/wikipedia/commons/3/36/Coca-Cola_can_2015.png", barcode: "444000444001", category: "Drinks" },
+  { name: "Pepsi", image: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pepsi_can_2023.png", barcode: "444000444002", category: "Drinks" },
+  { name: "Orange Juice", image: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Orange_juice_1.jpg", barcode: "444000444003", category: "Drinks" },
+  { name: "Mineral Water", image: "https://images.unsplash.com/photo-1564419320461-6870880221ad?auto=format&fit=crop&w=700&q=80", barcode: "444000444004", category: "Drinks" },
+  { name: "Iced Coffee", image: "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80", barcode: "444000444005", category: "Drinks" },
+  { name: "Green Tea", image: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=700&q=80", barcode: "444000444006", category: "Drinks" },
+  { name: "Energy Drink", image: "https://images.unsplash.com/photo-1622543925917-763c34d1a86e?auto=format&fit=crop&w=700&q=80", barcode: "444000444007", category: "Drinks" },
+
+  { name: "Nivea Body Lotion", image: "https://m.media-amazon.com/images/I/61zW6V3xX5L.jpg", barcode: "555000555001", category: "Beauty" },
+  { name: "Dove Soap", image: "https://m.media-amazon.com/images/I/71b+S7LSdJL.jpg", barcode: "555000555002", category: "Beauty" },
+  { name: "L'Oreal Shampoo", image: "https://m.media-amazon.com/images/I/61j8ikf2l5L.jpg", barcode: "555000555003", category: "Beauty" },
+  { name: "Face Moisturizer", image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=700&q=80", barcode: "555000555004", category: "Beauty" },
+  { name: "Sunscreen SPF 50", image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=700&q=80", barcode: "555000555005", category: "Beauty" },
+  { name: "Lip Balm", image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=700&q=80", barcode: "555000555006", category: "Beauty" },
+  { name: "Hand Cream", image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=700&q=80", barcode: "555000555007", category: "Beauty" },
+
+  { name: "Dishwashing Liquid", image: "https://m.media-amazon.com/images/I/61W7c8Qqh-L.jpg", barcode: "666000666001", category: "Home Essentials" },
+  { name: "Kitchen Towels", image: "https://m.media-amazon.com/images/I/71N+W4V9hXL.jpg", barcode: "666000666002", category: "Home Essentials" },
+  { name: "Air Freshener", image: "https://m.media-amazon.com/images/I/61k5Vj0vD1L.jpg", barcode: "666000666003", category: "Home Essentials" },
+  { name: "Laundry Detergent", image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=700&q=80", barcode: "666000666004", category: "Home Essentials" },
+  { name: "Toilet Paper", image: "https://images.unsplash.com/photo-1584556812952-905ffd0c611a?auto=format&fit=crop&w=700&q=80", barcode: "666000666005", category: "Home Essentials" },
+  { name: "Cleaning Spray", image: "https://images.unsplash.com/photo-1585421514738-01798e348b17?auto=format&fit=crop&w=700&q=80", barcode: "666000666006", category: "Home Essentials" },
+  { name: "Storage Basket", image: "https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=700&q=80", barcode: "666000666007", category: "Home Essentials" }
+];
