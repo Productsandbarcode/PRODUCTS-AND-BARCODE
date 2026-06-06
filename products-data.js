@@ -1,6 +1,6 @@
 // Add new products here. Use category names already shown on the page.
 // Example: { name: "Product Name", image: "https://image-url", barcode: "123456789", category: "Electronics" },
- = [
+  window.SAMPLE_PRODUCTS = [
   { name: "Apple AirPods Pro", image: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/MQD83?wid=572&hei=572&fmt=jpeg&qlt=95&.v=1660803972361", barcode: "111000111001", category: "Electronics" },
   { name: "Logitech Wireless Mouse", image: "https://resource.logitech.com/w_692,c_limit,q_auto,f_auto,dpr_1.0/d_transparent.gif/content/dam/logitech/en/products/mice/m185/gallery/m185-grey-top-view.png?v=1", barcode: "111000111002", category: "Electronics" },
   { name: "JBL Bluetooth Speaker", image: "https://www.pngmart.com/files/22/JBL-Speaker-PNG-Isolated-File.png", barcode: "111000111003", category: "Electronics" },
