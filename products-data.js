@@ -53,5 +53,17 @@
   barcode: "6281100390510",
   category: "Supermarket"
 },
+    {
+  name: "Al Rai Ice Cream Mix Cotton Candy 1L",
+  image: "images/6281100301494.webp",
+  barcode: "6281100301494",
+  category: "Supermarket"
+},
+{
+  name: "Al Rai Ice Cream Mix Vanilla 1L",
+  image: "images/6281100390497.webp",
+  barcode: "6281100390497",
+  category: "Supermarket"
+},
   { name: "Storage Basket", image: "https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=700&q=80", barcode: "666000666007", category: "Home Essentials" }
 ];
