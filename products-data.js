@@ -47,5 +47,11 @@
   { name: "Laundry Detergent", image: "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=700&q=80", barcode: "666000666004", category: "Home Essentials" },
   { name: "Toilet Paper", image: "https://images.unsplash.com/photo-1584556812952-905ffd0c611a?auto=format&fit=crop&w=700&q=80", barcode: "666000666005", category: "Home Essentials" },
   { name: "Cleaning Spray", image: "https://images.unsplash.com/photo-1585421514738-01798e348b17?auto=format&fit=crop&w=700&q=80", barcode: "666000666006", category: "Home Essentials" },
+    {
+  name: "Al Rai Ice Cream Mix Chocolate",
+  image: "images/6281100390510.webp",
+  barcode: "6281100390510",
+  category: "Supermarket"
+},
   { name: "Storage Basket", image: "https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=700&q=80", barcode: "666000666007", category: "Home Essentials" }
 ];
