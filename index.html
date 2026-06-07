@@ -397,7 +397,7 @@
 
     searchInput.addEventListener("input", applyFilters);
 
-    /*db.collection("products").onSnapshot(function(snapshot) {
+    db.collection("products").onSnapshot(function(snapshot) {
       firestoreProducts = snapshot.docs.map(function(doc) {
         return { id: doc.id, ...doc.data() };
       });
@@ -405,9 +405,7 @@
     }, function(error) {
       console.error(error);
       applyFilters();
-    });*/
-    console.log("Loading products", exampleProducts.length);
-     applyFilters();
+    });
     const revealItems = document.querySelectorAll(".reveal, .reveal-delay");
     const revealObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
