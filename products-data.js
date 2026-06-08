@@ -65,5 +65,42 @@
   barcode: "6281100390497",
   category: "Supermarket"
 },
+    {
+  name: "Al Rai Ice Cream Mix Strawberry 1L",
+  image: "images/6281100390534.webp",
+  barcode: "6281100390534",
+  category: "Supermarket"
+},
+{
+  name: "Kraft Cheddar Cheese Spread Original 140g",
+  image: "images/6281100080806.webp",
+  barcode: "6281100080806",
+  category: "Supermarket"
+},
+{
+  name: "Kraft Cheddar Cheese Spread Original 230g",
+  image: "images/6284012090192.webp",
+  barcode: "6284012090192",
+  category: "Supermarket"
+},
+{
+  name: "Kraft Cheddar Cheese Spread Original 480g",
+  image: "images/6284012090222.webp",
+  barcode: "6284012090222",
+  category: "Supermarket"
+},
+{
+  name: "Kraft Cheddar Cheese Spread Original 870g",
+  image: "images/6284012090253.webp",
+  barcode: "6284012090253",
+  category: "Supermarket"
+},
+{
+  name: "Kraft Cheddar Cheese Spread Squeeze Original 440g",
+  image: "images/6284012090284.webp",
+  barcode: "6284012090284",
+  category: "Supermarket"
+},
+    
   { name: "Storage Basket", image: "https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=700&q=80", barcode: "666000666007", category: "Home Essentials" }
 ];
