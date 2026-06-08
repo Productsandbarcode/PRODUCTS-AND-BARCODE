@@ -284,7 +284,7 @@
                       </a>
                       <div class="product-body">
                         <span class="tag">${escapeHtml(product.category || "Product")}</span>
-                        <h3>${escapeHtml(product.name)}</h3>
+                        <h3>${escapeHtml((product.name || "").toUpperCase())}</h3>
                         <dl class="product-meta">
                           <div><dt>Barcode</dt><dd>${product.barcode ? escapeHtml(product.barcode) : "No barcode"}</dd></div>
                           <!--<div><dt>Views</dt><dd>${Number(product.views || 0)}</dd></div>-->
