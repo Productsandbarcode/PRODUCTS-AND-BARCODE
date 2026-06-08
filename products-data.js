@@ -101,6 +101,43 @@
   barcode: "6284012090284",
   category: "Supermarket"
 },
+    {
+  name: "Intersoft Paper Rolls QMC11/25",
+  image: "images/6281234567895.webp",
+  barcode: "6281234567895",
+  category: "Electronic"
+},
+{
+  name: "Puck Original Spreadable Cheese Squeeze 400g",
+  image: "images/6281048106495.webp",
+  barcode: "6281048106495",
+  category: "Supermarket"
+},
+{
+  name: "Ovvio Pistacchiella Cream Pistachio Spread 200g",
+  image: "images/8033971610161.webp",
+  barcode: "8033971610161",
+  category: "Supermarket"
+},
+{
+  name: "Lotus Biscoff Creamy Spread 400g",
+  image: "images/5410126116953.webp",
+  barcode: "5410126116953",
+  category: "Supermarket"
+},
+{
+  name: "Hanaa Oats Granola Tutti Fruity 400g",
+  image: "images/6281055001981.webp",
+  barcode: "6281055001981",
+  category: "Supermarket"
+},
+{
+  name: "Nutella Hazelnut Spread Family Pack 1kg",
+  image: "images/8000500193389.webp",
+  barcode: "8000500193389",
+  category: "Supermarket"
+},
+
     
   { name: "Storage Basket", image: "https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=700&q=80", barcode: "666000666007", category: "Home Essentials" }
 ];
