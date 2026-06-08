@@ -261,6 +261,11 @@
       }
 
       const grouped = groupProducts(products);
+      Object.keys(grouped).forEach(function(category) {
+  grouped[category].sort(function(a, b) {
+    return a.name.localeCompare(b.name);
+  });
+});
       const categoryOrder = ["Electronics", "Supermarket", "Fresh Food", "Drinks", "Beauty", "Home Essentials", "Other"];
 
       catalogSections.innerHTML = categoryOrder
