@@ -339,31 +339,34 @@
       });
     }
 
-    function applyFilters() {
-      const query = searchInput.value.trim().toLowerCase();
-      let products = getMergedProducts();
+function applyFilters() {
+  const query = searchInput.value.trim().toLowerCase();
+  let products = getMergedProducts();
 
-      if (selectedCategory === "Barcode Products") {
-      products = products.filter(function(product) {
+  if (selectedCategory === "Barcode Products") {
+    products = products.filter(function(product) {
       return product.barcode && product.barcode.trim() !== "";
-      });
-      if (selectedCategory !== "All") {
-        products = products.filter(function(product) {
-          return (product.category || "").toLowerCase() === selectedCategory.toLowerCase();
-        });
-      }
+    });
+  } else if (selectedCategory !== "All") {
+    products = products.filter(function(product) {
+      return (product.category || "").toLowerCase() === selectedCategory.toLowerCase();
+    });
+  }
 
-      if (query) {
-        products = products.filter(function(product) {
-          const name = (product.name || "").toLowerCase();
-          const barcode = (product.barcode || "").toLowerCase();
-          const category = (product.category || "").toLowerCase();
-          return name.includes(query) || barcode.includes(query) || category.includes(query);
-        });
-      }
+  if (query) {
+    products = products.filter(function(product) {
+      const name = (product.name || "").toLowerCase();
+      const barcode = (product.barcode || "").toLowerCase();
+      const category = (product.category || "").toLowerCase();
 
-      renderCatalog(products);
-    }
+      return name.includes(query) ||
+             barcode.includes(query) ||
+             category.includes(query);
+    });
+  }
+
+  renderCatalog(products);
+}
 
     menuToggle.addEventListener("click", function() {
       const isOpen = quickMenu.hidden;
