@@ -112,29 +112,7 @@ document.getElementById("buyLinks").innerHTML = `
      AliExpress
   </a>
 `;
-  const search = encodeURIComponent(product.name);
-
-document.body.innerHTML += `
-<hr>
-
-<h2>Buy Online</h2>
-
-<p>
-<a href="https://www.amazon.sa/s?k=${search}" target="_blank">Amazon</a>
-</p>
-
-<p>
-<a href="https://www.noon.com/saudi-en/search/?q=${search}" target="_blank">Noon</a>
-</p>
-
-<p>
-<a href="https://www.alibaba.com/trade/search?SearchText=${search}" target="_blank">Alibaba</a>
-</p>
-
-<p>
-<a href="https://www.aliexpress.com/wholesale?SearchText=${search}" target="_blank">AliExpress</a>
-</p>
-`;
+  
 }else{
   document.getElementById("productName").textContent =
     "Product Not Found";
