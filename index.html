@@ -52,6 +52,7 @@
 
       <div class="category-nav" aria-label="Categories">
         <button class="category-pill active" data-category="All" type="button">All</button>
+        <button class="category-pill" data-category="Barcode Products" type="button">Barcode Products</button>
         <button class="category-pill" data-category="Electronics" type="button">Electronics</button>
         <button class="category-pill" data-category="Supermarket" type="button">Supermarket</button>
         <button class="category-pill" data-category="Fresh Food" type="button">Fresh Food</button>
@@ -266,7 +267,7 @@
     return a.name.localeCompare(b.name);
   });
 });
-      const categoryOrder = ["Electronics", "Supermarket", "Fresh Food", "Drinks", "Beauty", "Home Essentials", "Other"];
+      const categoryOrder = ["Electronics", "Barcode Products", "Supermarket", "Fresh Food", "Drinks", "Beauty", "Home Essentials", "Other"];
 
       catalogSections.innerHTML = categoryOrder
         .filter(function(category) {
@@ -342,6 +343,10 @@
       const query = searchInput.value.trim().toLowerCase();
       let products = getMergedProducts();
 
+      if (selectedCategory === "Barcode Products") {
+      products = products.filter(function(product) {
+      return product.barcode && product.barcode.trim() !== "";
+      });
       if (selectedCategory !== "All") {
         products = products.filter(function(product) {
           return (product.category || "").toLowerCase() === selectedCategory.toLowerCase();
