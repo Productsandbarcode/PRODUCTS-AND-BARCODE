@@ -300,9 +300,10 @@
                           <div><dt>Barcode</dt><dd>${product.barcode ? escapeHtml(product.barcode) : "No barcode"}</dd></div>
                           <!--<div><dt>Views</dt><dd>${Number(product.views || 0)}</dd></div>-->
                         </dl>
-                        ${isLiveProduct
-                          ? `<button class="btn-primary buy-btn" data-id="${product.id}" data-name="${escapeHtml(product.name)}" type="button">Buy Now</button>`
-                          : `<button class="btn-primary buy-btn" data-name="${escapeHtml(product.name)}" type="button">Buy Now</button>`}
+                        <a class="btn-primary buy-btn"
+                       href="product.html?barcode=${encodeURIComponent(product.barcode)}">
+                       Buy Now
+                      </a>
                       </div>
                     </article>
                   `;
