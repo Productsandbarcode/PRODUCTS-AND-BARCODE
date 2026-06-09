@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="style.css">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product Details</title>
@@ -31,13 +32,35 @@ body{
 </head>
 <body>
 
-<h1 id="productName">Loading...</h1>
+<div class="product-details">
 
-<img id="productImage" class="product-image" src="" alt="">
+  <img id="productImage" class="product-image" src="" alt="">
 
-<p><strong>Barcode:</strong> <span id="productBarcode"></span></p>
+  <div class="product-info">
 
-<p><strong>Category:</strong> <span id="productCategory"></span></p>
+    <h1 id="productName">Loading...</h1>
+
+    <p>
+      <strong>Barcode:</strong>
+      <span id="productBarcode"></span>
+    </p>
+
+    <p>
+      <strong>Category:</strong>
+      <span id="productCategory"></span>
+    </p>
+
+    <div id="buyLinks"></div>
+
+    <p>
+      <a href="index.html" class="btn-primary">
+        Back to Products
+      </a>
+    </p>
+
+  </div>
+
+</div>
 
 <script src="products-data.js"></script>
 
@@ -66,6 +89,29 @@ if(product){
 
   document.getElementById("productCategory").textContent =
     product.category;
+  const search = encodeURIComponent(product.name);
+
+document.getElementById("buyLinks").innerHTML = `
+  <a class="btn-primary" target="_blank"
+     href="https://www.amazon.sa/s?k=${search}">
+     Amazon
+  </a>
+
+  <a class="btn-primary" target="_blank"
+     href="https://www.noon.com/saudi-en/search/?q=${search}">
+     Noon
+  </a>
+
+  <a class="btn-primary" target="_blank"
+     href="https://www.alibaba.com/trade/search?SearchText=${search}">
+     Alibaba
+  </a>
+
+  <a class="btn-primary" target="_blank"
+     href="https://www.aliexpress.com/wholesale?SearchText=${search}">
+     AliExpress
+  </a>
+`;
   const search = encodeURIComponent(product.name);
 
 document.body.innerHTML += `
