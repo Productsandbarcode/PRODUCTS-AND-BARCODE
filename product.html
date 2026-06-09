@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
 
+<style>
+body{
+  font-family:Arial,sans-serif;
+  max-width:900px;
+  margin:40px auto;
+  padding:20px;
+}
+
+.product-image{
+  max-width:300px;
+  width:100%;
+}
+
+.buy-btn{
+  display:inline-block;
+  margin-top:20px;
+  padding:12px 20px;
+  background:#0d6efd;
+  color:white;
+  text-decoration:none;
+  border-radius:8px;
+}
+</style>
+</head>
+<body>
+
+<h1 id="productName">Loading...</h1>
+
+<img id="productImage" class="product-image" src="" alt="">
+
+<p><strong>Barcode:</strong> <span id="productBarcode"></span></p>
+
+<p><strong>Category:</strong> <span id="productCategory"></span></p>
+
+<script src="products-data.js"></script>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const barcode = params.get("barcode");
+
+const product = (window.SAMPLE_PRODUCTS || []).find(function(item){
+  return String(item.barcode) === String(barcode);
+});
+
+if(product){
+  document.title = product.name;
+
+  document.getElementById("productName").textContent =
+    product.name.toUpperCase();
+
+  document.getElementById("productImage").src =
+    product.image;
+
+  document.getElementById("productImage").alt =
+    product.name;
+
+  document.getElementById("productBarcode").textContent =
+    product.barcode || "No barcode";
+
+  document.getElementById("productCategory").textContent =
+    product.category;
+}else{
+  document.getElementById("productName").textContent =
+    "Product Not Found";
+}
+</script>
+
+</body>
+</html>
