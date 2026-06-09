@@ -285,9 +285,14 @@
                   const isLiveProduct = Boolean(product.id);
                   return `
                     <article class="product-card">
-                      <a class="product-image" href="${escapeHtml(product.link)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(product.name)}">
-                        <img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy" />
-                      </a>
+                     <a class="product-image"
+                     href="product.html?barcode=${encodeURIComponent(product.barcode)}"
+                     aria-label="Open ${escapeHtml(product.name)}">
+                  
+                    <img src="${escapeHtml(product.image)}"
+                         alt="${escapeHtml(product.name)}"
+                         loading="lazy" />
+                       </a>
                       <div class="product-body">
                         <span class="tag">${escapeHtml(product.category || "Product")}</span>
                         <h3>${escapeHtml((product.name || "").toUpperCase())}</h3>
