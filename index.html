@@ -409,7 +409,7 @@ function applyFilters() {
     });
 
     searchInput.addEventListener("input", applyFilters);
-
+   applyFilters();
     db.collection("products").onSnapshot(function(snapshot) {
       firestoreProducts = snapshot.docs.map(function(doc) {
         return { id: doc.id, ...doc.data() };
