@@ -840,3 +840,71 @@ h1 {
     justify-content:center;
     gap:10px;
 }
+.btn-primary,
+.buy-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 14px 24px;
+    border-radius: 16px;
+
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+
+    overflow: hidden;
+    transition: all 0.3s ease;
+
+    border: 2px solid transparent;
+}
+
+.btn-primary::before,
+.buy-btn::before {
+    content: "";
+    position: absolute;
+    inset: -3px;
+
+    background: linear-gradient(
+        90deg,
+        #ff0000,
+        #ff8800,
+        #ffee00,
+        #00ff66,
+        #00ffff,
+        #0066ff,
+        #aa00ff,
+        #ff0088
+    );
+
+    background-size: 400% 400%;
+    border-radius: 18px;
+    z-index: -1;
+
+    animation: rainbowGlow 6s linear infinite;
+}
+
+.btn-primary:hover,
+.buy-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+
+    box-shadow:
+        0 0 20px rgba(0,255,255,.4),
+        0 0 40px rgba(0,255,255,.2);
+}
+
+@keyframes rainbowGlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 400% 50%; }
+}
