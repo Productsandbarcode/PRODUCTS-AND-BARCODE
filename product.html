@@ -91,28 +91,35 @@ if(product){
     product.category;
   const search = encodeURIComponent(product.name);
 
+const icons = {
+  "amazon-sa": "https://www.google.com/s2/favicons?domain=amazon.sa&sz=64",
+  "noon": "https://www.google.com/s2/favicons?domain=noon.com&sz=64",
+  "alibaba": "https://www.google.com/s2/favicons?domain=alibaba.com&sz=64",
+  "aliexpress": "https://www.google.com/s2/favicons?domain=aliexpress.com&sz=64"
+};
+
 document.getElementById("buyLinks").innerHTML = `
 <a class="btn-primary" target="_blank"
    href="https://www.amazon.sa/s?k=${search}">
-   <img src="images/amazon-logo.webp" height="24">
+   <img src="${icons['amazon-sa']}" width="20" height="20">
    Amazon
 </a>
 
 <a class="btn-primary" target="_blank"
    href="https://www.noon.com/saudi-en/search/?q=${search}">
-   <img src="images/noon-logo.webp" height="24">
+   <img src="${icons['noon']}" width="20" height="20">
    Noon
 </a>
 
 <a class="btn-primary" target="_blank"
    href="https://www.alibaba.com/trade/search?SearchText=${search}">
-   <img src="images/alibaba-logo.webp" height="24">
+   <img src="${icons['alibaba']}" width="20" height="20">
    Alibaba
 </a>
 
 <a class="btn-primary" target="_blank"
    href="https://www.aliexpress.com/wholesale?SearchText=${search}">
-   <img src="images/aliexpress-logo.webp" height="24">
+   <img src="${icons['aliexpress']}" width="20" height="20">
    AliExpress
 </a>
 `;
