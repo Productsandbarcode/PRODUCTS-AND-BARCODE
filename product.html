@@ -92,25 +92,29 @@ if(product){
   const search = encodeURIComponent(product.name);
 
 document.getElementById("buyLinks").innerHTML = `
-  <a class="btn-primary" target="_blank"
-     href="https://www.amazon.sa/s?k=${search}">
-     Amazon
-  </a>
+<a class="btn-primary" target="_blank"
+   href="https://www.amazon.sa/s?k=${search}">
+   <img src="images/amazon-logo.webp" height="24">
+   Amazon
+</a>
 
-  <a class="btn-primary" target="_blank"
-     href="https://www.noon.com/saudi-en/search/?q=${search}">
-     Noon
-  </a>
+<a class="btn-primary" target="_blank"
+   href="https://www.noon.com/saudi-en/search/?q=${search}">
+   <img src="images/noon-logo.webp" height="24">
+   Noon
+</a>
 
-  <a class="btn-primary" target="_blank"
-     href="https://www.alibaba.com/trade/search?SearchText=${search}">
-     Alibaba
-  </a>
+<a class="btn-primary" target="_blank"
+   href="https://www.alibaba.com/trade/search?SearchText=${search}">
+   <img src="images/alibaba-logo.webp" height="24">
+   Alibaba
+</a>
 
-  <a class="btn-primary" target="_blank"
-     href="https://www.aliexpress.com/wholesale?SearchText=${search}">
-     AliExpress
-  </a>
+<a class="btn-primary" target="_blank"
+   href="https://www.aliexpress.com/wholesale?SearchText=${search}">
+   <img src="images/aliexpress-logo.webp" height="24">
+   AliExpress
+</a>
 `;
   
 }else{
