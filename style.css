@@ -815,3 +815,28 @@ h1 {
     aspect-ratio: 4 / 3;
   }
 }
+.product-details{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
+.product-image{
+    display:block;
+    margin:0 auto 20px;
+    max-width:300px;
+    width:100%;
+}
+#buyLinks{
+    display:grid;
+    gap:12px;
+    margin-top:20px;
+}
+
+#buyLinks a{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+}
