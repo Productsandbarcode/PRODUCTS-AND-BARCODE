@@ -1007,3 +1007,35 @@ h1 {
     padding:16px;
     margin-top:20px;
 }
+.product-card-info{
+    background:rgba(255,255,255,.05);
+    border-radius:20px;
+    padding:20px;
+    margin:20px 0;
+}
+
+.info-row{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.info-row:last-child{
+    border-bottom:none;
+}
+
+.info-label{
+    font-weight:700;
+}
+
+.action-buttons{
+    display:grid;
+    gap:12px;
+    margin:20px 0;
+}
+
+.section-title{
+    margin-top:30px;
+    text-align:center;
+}
