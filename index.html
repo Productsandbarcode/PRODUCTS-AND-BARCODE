@@ -313,10 +313,10 @@
           `;
         }).join("");
 
-      attachBuyEvents();
+      // attachBuyEvents();
     }
 
-    function attachBuyEvents() {
+    //function attachBuyEvents() {
       document.querySelectorAll(".buy-btn").forEach(function(button) {
         button.addEventListener("click", async function() {
           const productId = button.getAttribute("data-id");
@@ -338,7 +338,7 @@
             }
           }
 
-          openBuyModal(productName);
+          //openBuyModal(productName);
           button.disabled = false;
           button.textContent = "Buy Now";
         });
