@@ -33,6 +33,10 @@ body{
     <p>
       <strong>Barcode:</strong>
       <span id="productBarcode"></span>
+
+      <button id="copyBarcodeBtn" class="btn-primary">
+      Copy Barcode
+      </button>
     </p>
 
     <p>
@@ -41,7 +45,11 @@ body{
     </p>
 
     <div id="buyLinks"></div>
-
+    <button id="shareBtn" class="btn-primary">
+  Share Product
+   </button>
+    <h3>Related Products</h3>
+<div id="relatedProducts"></div>
     <p>
       <a href="index.html" class="btn-primary">
         Back to Products
@@ -64,7 +72,7 @@ const product = (window.SAMPLE_PRODUCTS || []).find(function(item){
 
 if(product){
   document.title = product.name;
-
+  
   document.getElementById("productName").textContent =
     product.name.toUpperCase();
 
@@ -79,6 +87,26 @@ if(product){
 
   document.getElementById("productCategory").textContent =
     product.category;
+  document.getElementById("copyBarcodeBtn").onclick = function(){
+  navigator.clipboard.writeText(product.barcode);
+  alert("Barcode copied!");
+};
+  document.getElementById("shareBtn").onclick = function(){
+  navigator.share({
+    title: product.name,
+    url: location.href
+  });
+};
+  const related = (window.SAMPLE_PRODUCTS || [])
+  .filter(p => p.category === product.category && p.name !== product.name)
+  .slice(0,4);
+
+document.getElementById("relatedProducts").innerHTML =
+  related.map(p => `
+    <a href="product.html?barcode=${p.barcode}">
+      ${p.name}
+    </a><br>
+  `).join("");
   const search = encodeURIComponent(product.name);
 
 const icons = {
