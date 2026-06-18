@@ -965,3 +965,45 @@ h1 {
     0%{background-position:0% 50%;}
     100%{background-position:400% 50%;}
 }
+.product-details{
+    max-width:900px;
+    margin:auto;
+    padding:20px;
+}
+
+.product-image{
+    width:100%;
+    max-width:350px;
+    display:block;
+    margin:0 auto 20px;
+    border-radius:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.product-info{
+    text-align:center;
+}
+
+#productName{
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+#buyLinks{
+    display:grid;
+    gap:12px;
+    margin-top:25px;
+}
+
+#relatedProducts{
+    display:grid;
+    gap:10px;
+    margin-top:20px;
+}
+
+.card{
+    background:rgba(255,255,255,.05);
+    border-radius:18px;
+    padding:16px;
+    margin-top:20px;
+}
