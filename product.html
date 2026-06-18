@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Product barcode lookup and buying options">
+<meta name="keywords" content="barcode, product, shopping">
 <title>Product Details</title>
 <link rel="stylesheet" href="style.css">
 <style>
@@ -71,8 +73,15 @@ const product = (window.SAMPLE_PRODUCTS || []).find(function(item){
 });
 
 if(product){
-  document.title = product.name;
-  
+  document.title = `${product.name} | Products & Barcode`;
+  const metaDescription = document.querySelector('meta[name="description"]');
+
+if(metaDescription){
+  metaDescription.setAttribute(
+    "content",
+    `${product.name} barcode ${product.barcode || ""} category ${product.category || ""}`
+  );
+}
   document.getElementById("productName").textContent =
     product.name.toUpperCase();
 
@@ -83,7 +92,7 @@ if(product){
     product.name;
 
   document.getElementById("productBarcode").textContent =
-    product.barcode || "No barcode";
+    product.barcode || "No barcode";u
 
   document.getElementById("productCategory").textContent =
     product.category;
