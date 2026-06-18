@@ -23,34 +23,38 @@ body{
 </style>
 </head>
 <body>
+<div class="product-card-info">
 
-<div class="product-details">
+  <div class="info-row">
+    <span class="info-label">🏷️ Category</span>
+    <span id="productCategory"></span>
+  </div>
 
-  <img id="productImage" class="product-image" src="" alt="">
+  <div class="info-row">
+    <span class="info-label">📦 Barcode</span>
+    <span id="productBarcode"></span>
+  </div>
 
-  <div class="product-info">
+</div>
 
-    <h1 id="productName">Loading...</h1>
+<div class="action-buttons">
 
-    <p>
-      <strong>Barcode:</strong>
-      <span id="productBarcode"></span>
+  <button id="copyBarcodeBtn" class="btn-primary">
+    📋 Copy Barcode
+  </button>
 
-      <button id="copyBarcodeBtn" class="btn-primary">
-      Copy Barcode
-      </button>
-    </p>
+  <button id="shareBtn" class="btn-primary">
+    📤 Share Product
+  </button>
 
-    <p>
-      <strong>Category:</strong>
-      <span id="productCategory"></span>
-    </p>
+</div>
 
-    <div id="buyLinks"></div>
-    <button id="shareBtn" class="btn-primary">
-  Share Product
-   </button>
-    <h3>Related Products</h3>
+<h3 class="section-title">🛒 Buy Online</h3>
+
+<div id="buyLinks"></div>
+
+<h3 class="section-title">🔥 Related Products</h3>
+
 <div id="relatedProducts"></div>
     <p>
       <a href="index.html" class="btn-primary">
