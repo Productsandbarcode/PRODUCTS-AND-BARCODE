@@ -166,6 +166,23 @@ document.getElementById("buyLinks").innerHTML = `
   document.getElementById("productName").textContent =
     "Product Not Found";
 }
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+
+    btn.addEventListener('mouseenter', () => {
+
+        btn.classList.remove('glow');
+
+        setTimeout(() => {
+            btn.classList.add('glow');
+        }, 10);
+
+        setTimeout(() => {
+            btn.classList.remove('glow');
+        }, 1200);
+
+    });
+
+});
 </script>
 
 </body>
