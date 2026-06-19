@@ -933,7 +933,7 @@ h1 {
     z-index:1;
 }
 
-.btn-primary::before{
+/*.btn-primary::before{
     content:"";
     position:absolute;
     inset:-2px;
@@ -971,7 +971,7 @@ h1 {
 @keyframes rainbowBorder{
     0%{background-position:0% 50%;}
     100%{background-position:400% 50%;}
-}
+}*/
 .product-details{
     max-width:900px;
     margin:auto;
@@ -1045,20 +1045,4 @@ h1 {
 .section-title{
     margin-top:30px;
     text-align:center;
-}
-.theme-switcher{
-    display:flex;
-    gap:10px;
-    justify-content:flex-end;
-    margin-bottom:20px;
-}
-
-[data-theme="dark"]{
-    background:#0f172a;
-    color:white;
-}
-
-[data-theme="light"]{
-    background:white;
-    color:#111827;
 }
