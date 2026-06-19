@@ -933,8 +933,10 @@ h1 {
     padding:14px 20px;
     border-radius:16px;
 
-    background:#111827; /* Dark button background */
-    color:#fff;
+    background:var(--surface);
+    color:var(--text);
+    border:1px solid var(--line); /* Dark button background */
+    
     text-decoration:none;
     font-weight:700;
 
@@ -1084,4 +1086,16 @@ h1 {
 .quick-menu a:hover{
     background:rgba(57,184,143,.15);
     color:var(--accent);
+}
+:root[data-theme="light"] .btn-primary,
+:root[data-theme="light"] .buy-btn{
+    background:#ffffff;
+    color:#20242a;
+    border:1px solid var(--line);
+}
+
+:root:not([data-theme="light"]) .btn-primary,
+:root:not([data-theme="light"]) .buy-btn{
+    background:#111827;
+    color:#ffffff;
 }
