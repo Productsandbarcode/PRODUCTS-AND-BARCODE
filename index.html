@@ -44,10 +44,28 @@
     </section>
 
     <section class="products-toolbar reveal-delay" aria-label="Product filters">
-      <div class="search-box">
-        <label class="sr-only" for="searchInput">Search products</label>
-        <input type="search" id="searchInput" placeholder="Search products or barcode" autocomplete="off" />
-      </div>
+     <div class="search-box">
+
+  <label class="sr-only" for="searchInput">
+    Search products
+  </label>
+
+  <div class="search-wrapper">
+
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Search products or barcode"
+      autocomplete="off"
+    />
+
+    <button id="scanBtn" type="button" class="scan-btn">
+      📷
+    </button>
+
+  </div>
+
+</div>
 
       <div class="category-nav" aria-label="Categories">
         <button class="category-pill active" data-category="All" type="button">All</button>
@@ -472,7 +490,55 @@ menuOverlay.addEventListener("click", function(){
     });
 
 });
-  
+  const scanBtn = document.getElementById("scanBtn");
+const scannerModal = document.getElementById("scannerModal");
+const closeScanner = document.getElementById("closeScanner");
+
+let html5QrCode;
+
+scanBtn.addEventListener("click", () => {
+
+  scannerModal.hidden = false;
+
+  html5QrCode = new Html5Qrcode("reader");
+
+  html5QrCode.start(
+    { facingMode: "environment" },
+    {
+      fps: 10,
+      qrbox: 250
+    },
+    (decodedText) => {
+
+      searchInput.value = decodedText;
+
+      applyFilters();
+
+      html5QrCode.stop();
+
+      scannerModal.hidden = true;
+    }
+  );
+
+});
+
+closeScanner.addEventListener("click", () => {
+
+  if(html5QrCode){
+    html5QrCode.stop();
+  }
+
+  scannerModal.hidden = true;
+
+});
   </script>
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <div id="scannerModal" hidden>
+  <div id="reader"></div>
+
+  <button id="closeScanner" class="btn-primary">
+    Close Scanner
+  </button>
+</div>
 </body>
 </html>
