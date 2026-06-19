@@ -491,6 +491,13 @@ menuOverlay.addEventListener("click", function(){
 
 });
   </script>
+  <div id="scannerModal" hidden>
+  <div id="reader"></div>
+
+  <button id="closeScanner" class="btn-primary">
+    Close Scanner
+  </button>
+</div>
  <script src="https://unpkg.com/html5-qrcode"></script>
 
 <script>
@@ -506,40 +513,28 @@ scanBtn.addEventListener("click", () => {
 
   html5QrCode = new Html5Qrcode("reader");
 
-  html5QrCode.start(
-    { facingMode: "environment" },
-    {
-      fps: 10,
-      qrbox: 250
-    },
-    (decodedText) => {
+  Html5Qrcode.getCameras().then(devices => {
 
-      document.getElementById("searchInput").value = decodedText;
+  if(devices && devices.length){
 
-      html5QrCode.stop();
-      scannerModal.hidden = true;
+    html5QrCode.start(
+      devices[0].id,
+      {
+        fps:10,
+        qrbox:250
+      },
+      (decodedText)=>{
+        document.getElementById("searchInput").value = decodedText;
+        applyFilters();
 
-    }
-  );
+        html5QrCode.stop();
+        scannerModal.hidden = true;
+      }
+    );
 
-});
-
-closeScanner.addEventListener("click", () => {
-
-  if(html5QrCode){
-    html5QrCode.stop();
   }
-
-  scannerModal.hidden = true;
 
 });
 </script>
-  <div id="scannerModal" hidden>
-  <div id="reader"></div>
-
-  <button id="closeScanner" class="btn-primary">
-    Close Scanner
-  </button>
-</div>
 </body>
 </html>
