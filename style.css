@@ -865,30 +865,41 @@ h1 {
 }
 
 .btn-primary::before,
-.buy-btn::before {
-    content: "";
-    position: absolute;
-    inset: -3px;
+.buy-btn::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:18px;
 
-    background: linear-gradient(
-        90deg,
-        #ff0000,
-        #ff8800,
-        #ffee00,
-        #00ff66,
-        #00ffff,
-        #0066ff,
-        #aa00ff,
-        #ff0088
+    background:linear-gradient(
+      90deg,
+      transparent,
+      #00ffff,
+      #00ff66,
+      #0066ff,
+      transparent
     );
 
-    background-size: 400% 400%;
-    border-radius: 18px;
-    z-index: -1;
-
-    animation: rainbowGlow 12s ease-in-out infinite;
+    background-size:300% 100%;
+    opacity:0;
+    z-index:-1;
+}
+.btn-primary.glow::before,
+.buy-btn.glow::before{
+    animation:borderSweep 1.2s ease-out;
 }
 
+@keyframes borderSweep{
+    0%{
+        background-position:0% 50%;
+        opacity:1;
+    }
+
+    100%{
+        background-position:300% 50%;
+        opacity:0;
+    }
+}
 .btn-primary:hover,
 .buy-btn:hover {
     transform: translateY(-3px) scale(1.02);
@@ -904,22 +915,6 @@ h1 {
         0 0 40px rgba(0,255,255,.2);
 }
 
-@keyframes rainbowGlow {
-
-    0% {
-        background-position: 0% 50%;
-    }
-
-    70% {
-        background-position: 0% 50%;
-    }
-
-    100% {
-        background-position: 400% 50%;
-    }
-
-}
-}
 .btn-primary{
     position:relative;
     display:flex;
