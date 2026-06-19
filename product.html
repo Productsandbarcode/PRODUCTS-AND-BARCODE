@@ -23,6 +23,10 @@ body{
 </style>
 </head>
 <body>
+  <div class="theme-switcher">
+  <button id="darkModeBtn" class="btn-primary">🌙 Dark</button>
+  <button id="lightModeBtn" class="btn-primary">☀️ Light</button>
+</div>
 <div class="product-details">
 
   <img id="productImage" class="product-image" src="" alt="">
@@ -183,6 +187,22 @@ document.getElementById("buyLinks").innerHTML = `
     });
 
 });
+  function applySavedTheme() {
+  const savedTheme = localStorage.getItem("theme") || "dark";
+  document.documentElement.dataset.theme = savedTheme;
+}
+
+document.getElementById("darkModeBtn").addEventListener("click", function() {
+  localStorage.setItem("theme", "dark");
+  applySavedTheme();
+});
+
+document.getElementById("lightModeBtn").addEventListener("click", function() {
+  localStorage.setItem("theme", "light");
+  applySavedTheme();
+});
+
+applySavedTheme();
 </script>
 
 </body>
