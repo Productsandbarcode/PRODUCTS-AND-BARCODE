@@ -490,7 +490,11 @@ menuOverlay.addEventListener("click", function(){
     });
 
 });
-  const scanBtn = document.getElementById("scanBtn");
+  </script>
+ <script src="https://unpkg.com/html5-qrcode"></script>
+
+<script>
+const scanBtn = document.getElementById("scanBtn");
 const scannerModal = document.getElementById("scannerModal");
 const closeScanner = document.getElementById("closeScanner");
 
@@ -510,13 +514,11 @@ scanBtn.addEventListener("click", () => {
     },
     (decodedText) => {
 
-      searchInput.value = decodedText;
-
-      applyFilters();
+      document.getElementById("searchInput").value = decodedText;
 
       html5QrCode.stop();
-
       scannerModal.hidden = true;
+
     }
   );
 
@@ -531,8 +533,7 @@ closeScanner.addEventListener("click", () => {
   scannerModal.hidden = true;
 
 });
-  </script>
-  <script src="https://unpkg.com/html5-qrcode"></script>
+</script>
   <div id="scannerModal" hidden>
   <div id="reader"></div>
 
