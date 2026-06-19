@@ -7,12 +7,11 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="menuOverlay" class="menu-overlay"></div>
   <div class="corner-menu">
-    <button id="menuToggle" class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="quickMenu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <button id="menuToggle" class="menu-toggle" type="button">
+  ≡
+</button>
     <div id="quickMenu" class="quick-menu" hidden>
       <button id="darkModeBtn" type="button">Dark Mode</button>
       <button id="lightModeBtn" type="button">Light Mode</button>
@@ -135,12 +134,21 @@
       return div.innerHTML;
     }
 
-    function applySavedTheme() {
-      const savedTheme = localStorage.getItem("theme") || "dark";
-      document.documentElement.dataset.theme = savedTheme;
-      darkModeBtn.classList.toggle("active", savedTheme === "dark");
-      lightModeBtn.classList.toggle("active", savedTheme === "light");
-    }
+   function applySavedTheme() {
+
+  let savedTheme = localStorage.getItem("theme");
+
+  if (!savedTheme) {
+    savedTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+
+  document.documentElement.dataset.theme = savedTheme;
+
+  darkModeBtn.classList.toggle("active", savedTheme === "dark");
+  lightModeBtn.classList.toggle("active", savedTheme === "light");
+}
 
     function closeMenu() {
       quickMenu.hidden = true;
@@ -374,11 +382,22 @@ function applyFilters() {
   renderCatalog(products);
 }
 
-    menuToggle.addEventListener("click", function() {
-      const isOpen = quickMenu.hidden;
-      quickMenu.hidden = !isOpen;
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-    });
+   const menuOverlay =
+document.getElementById("menuOverlay");
+
+menuToggle.addEventListener("click", function(){
+
+  quickMenu.classList.add("show");
+  menuOverlay.classList.add("show");
+
+});
+
+menuOverlay.addEventListener("click", function(){
+
+  quickMenu.classList.remove("show");
+  menuOverlay.classList.remove("show");
+
+});
 
     darkModeBtn.addEventListener("click", function() {
       setTheme("dark");
@@ -453,22 +472,7 @@ function applyFilters() {
     });
 
 });
-    (function () {
-  const savedTheme = localStorage.getItem("theme");
-
-  if (savedTheme) {
-    document.documentElement.setAttribute("data-theme", savedTheme);
-  } else {
-    const prefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    ).matches;
-
-    document.documentElement.setAttribute(
-      "data-theme",
-      prefersDark ? "dark" : "light"
-    );
-  }
-})();
+  
   </script>
 </body>
 </html>
