@@ -436,21 +436,6 @@ function applyFilters() {
     revealItems.forEach(function(item) {
       revealObserver.observe(item);
     });
-    setInterval(() => {
-    document.querySelectorAll('.btn-primary').forEach(btn => {
-
-        btn.classList.remove('glow');
-
-        setTimeout(() => {
-            btn.classList.add('glow');
-        }, 50);
-
-        setTimeout(() => {
-            btn.classList.remove('glow');
-        }, 1200);
-
-    });
-}, 5000);
   </script>
 </body>
 </html>
