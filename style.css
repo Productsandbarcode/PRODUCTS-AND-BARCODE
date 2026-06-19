@@ -86,12 +86,6 @@ input {
   cursor: pointer;
 }
 
-.menu-toggle span {
-  width: 0.35rem;
-  height: 0.35rem;
-  border-radius: 999px;
-  background: currentColor;
-}
 
 .menu-toggle:hover {
   border-color: color-mix(in srgb, var(--accent) 70%, var(--line));
@@ -104,7 +98,8 @@ input {
 
   display:grid;
 
-  width:calc(100% - 300px);
+  width:260px;
+  max-width:260px;
   height:100vh;
 
   padding:20px;
@@ -122,7 +117,7 @@ input {
 }
 
 .quick-menu.show{
-  right:50px;
+  right:0;
 }
 
 .quick-menu[hidden]{
@@ -1063,7 +1058,7 @@ h1 {
     position:fixed;
     top:0;
     left:0;
-    width:calc(100% - 300px); /* menu width */
+    width:calc(100% - 220px); /* menu width */
     height:100vh;
 
     background:rgba(0,0,0,.35);
@@ -1080,10 +1075,13 @@ h1 {
     opacity:1;
     visibility:visible;
 }
-.quick-menu button,
-.quick-menu a{
-    min-height:40px;
-    padding:8px 12px;
-    font-size:14px;
-    border-radius:8px;
+.menu-toggle{
+    font-size:28px;
+    font-weight:700;
+    line-height:1;
+}
+.quick-menu button:hover,
+.quick-menu a:hover{
+    background:rgba(57,184,143,.15);
+    color:var(--accent);
 }
