@@ -1,0 +1,20 @@
+{
+  "name": "Products & Barcode",
+  "short_name": "Products",
+  "start_url": "/PRODUCTS-AND-BARCODE/",
+  "display": "standalone",
+  "background_color": "#111315",
+  "theme_color": "#39b88f",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
