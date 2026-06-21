@@ -43,9 +43,6 @@ body{
     <h1 id="productName">Loading...</h1>
 
     <div class="product-card-info">
-<button id="favoriteBtn" class="btn-primary">
-  ❤️ Add to Favorites
-</button>
       <div class="info-row">
         <span class="info-label">🏷️ Category</span>
         <span id="productCategory"></span>
@@ -146,28 +143,31 @@ if(metaDescription){
 
   document.getElementById("productCategory").textContent =
     product.category;
-const favoriteBtn = document.getElementById("favoriteBtn");
+const favoriteBtn =
+  document.getElementById("favoriteBtn");
 
 function updateFavoriteButton(){
 
     const favorites =
-      JSON.parse(localStorage.getItem("favorites") || "[]");
+      JSON.parse(
+        localStorage.getItem("favorites") || "[]"
+      );
 
-    const isFavorite = favorites.some(
-      item => item.barcode === product.barcode
-    );
+    const isFavorite =
+      favorites.some(item =>
+        item.barcode === product.barcode
+      );
 
-    favoriteBtn.innerHTML = isFavorite
-      ? "❤️ Favorited"
-      : "🤍 Add to Favorites";
+    favoriteBtn.innerHTML =
+      isFavorite ? "❤️" : "🤍";
 
     favoriteBtn.classList.toggle(
-      "favorite-active",
+      "active",
       isFavorite
     );
 }
 
-favoriteBtn.addEventListener("click", function(){
+favoriteBtn.addEventListener("click", () => {
 
     toggleFavorite(product);
 
