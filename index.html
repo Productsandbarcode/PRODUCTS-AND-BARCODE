@@ -159,9 +159,8 @@
       div.textContent = text || "";
       return div.innerHTML;
     }
-   renderScanHistory();
    function applySavedTheme() {
-
+    renderScanHistory();
   let savedTheme = localStorage.getItem("theme");
 
   if (!savedTheme) {
@@ -594,11 +593,33 @@ scanBtn.addEventListener("click", async () => {
     html5QrCode.stop();
     scannerModal.hidden = true;
 
-    if(product){
-      saveScan(product);
-        window.location.href =
-          `product.html?barcode=${encodeURIComponent(product.barcode)}`;
-    }
+ if(product){
+
+    saveScan(product);
+
+    renderScanHistory();
+
+    window.location.href =
+      `product.html?barcode=${encodeURIComponent(product.barcode)}`;
+
+}else{
+
+    let history =
+      JSON.parse(localStorage.getItem("scanHistory") || "[]");
+
+    history.unshift({
+      name: "Unknown Product",
+      barcode: barcode
+    });
+
+    localStorage.setItem(
+      "scanHistory",
+      JSON.stringify(history)
+    );
+
+    renderScanHistory();
+
+}
 
 }
         );
