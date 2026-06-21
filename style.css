@@ -1240,3 +1240,14 @@ h1 {
     font-size:80px;
     margin-bottom:20px;
 }
+.favorite-active{
+    background:linear-gradient(
+      135deg,
+      #ef4444,
+      #ec4899
+    ) !important;
+
+    color:#fff !important;
+
+    border:none;
+}
