@@ -6,29 +6,34 @@
 </head>
 <body>
 
-<header class="favorites-header">
+<header class="favorites-hero">
 
   <div>
-    <span class="favorites-tag">
+    <span class="hero-badge">
       ❤️ Saved Products
     </span>
 
-    <h1>
-      My Favorites
-      <span id="favoriteCount"></span>
-    </h1>
+    <h1>My Favorites</h1>
 
     <p>
-      Your saved products are stored on this device.
+      Quick access to products you love.
     </p>
   </div>
 
-  <a href="index.html" class="btn-primary">
-    ← Back
+  <a href="index.html" class="back-btn">
+    ← Products
   </a>
 
 </header>
+<div class="favorites-stats">
 
+  <div class="summary-card">
+    <strong id="favoriteCount">0</strong>
+    <span>Favorites</span>
+  </div>
+
+</div>
+  
 <div id="favoritesList" class="favorite-grid"></div>
   <script>
 (function () {
@@ -72,6 +77,8 @@ const favorites =
   JSON.parse(localStorage.getItem("favorites") || "[]");
   document.getElementById("favoriteCount").textContent =
   `(${favorites.length})`;
+  document.getElementById("favoriteTotal").textContent =
+  favorites.length;
 const container =
   document.getElementById("favoritesList");
 
