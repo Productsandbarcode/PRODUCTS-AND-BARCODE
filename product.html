@@ -135,6 +135,24 @@ if(metaDescription){
 
   document.getElementById("productCategory").textContent =
     product.category;
+  const favoriteBtn = document.getElementById("favoriteBtn");
+
+favoriteBtn.addEventListener("click", function(){
+
+    toggleFavorite(product);
+
+    let favorites =
+      JSON.parse(localStorage.getItem("favorites") || "[]");
+
+    const isFavorite = favorites.some(
+      item => item.barcode === product.barcode
+    );
+
+    favoriteBtn.textContent = isFavorite
+      ? "❤️ Added to Favorites"
+      : "🤍 Add to Favorites";
+
+});
   document.getElementById("copyBarcodeBtn").onclick = function(){
   navigator.clipboard.writeText(product.barcode);
   alert("Barcode copied!");
