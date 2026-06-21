@@ -32,7 +32,9 @@ body{
     <h1 id="productName">Loading...</h1>
 
     <div class="product-card-info">
-
+<button id="favoriteBtn" class="btn-primary">
+  ❤️ Add to Favorites
+</button>
       <div class="info-row">
         <span class="info-label">🏷️ Category</span>
         <span id="productCategory"></span>
@@ -91,6 +93,32 @@ if(metaDescription){
   metaDescription.setAttribute(
     "content",
     `${product.name} barcode ${product.barcode || ""} category ${product.category || ""}`
+  );
+}
+  function toggleFavorite(product){
+
+  let favorites =
+    JSON.parse(localStorage.getItem("favorites") || "[]");
+
+  const exists = favorites.find(
+    item => item.barcode === product.barcode
+  );
+
+  if(exists){
+    favorites = favorites.filter(
+      item => item.barcode !== product.barcode
+    );
+  }else{
+    favorites.push({
+      name: product.name,
+      barcode: product.barcode,
+      image: product.image
+    });
+  }
+
+  localStorage.setItem(
+    "favorites",
+    JSON.stringify(favorites)
   );
 }
   document.getElementById("productName").textContent =
