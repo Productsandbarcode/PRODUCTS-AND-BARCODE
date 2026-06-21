@@ -1157,7 +1157,3 @@ h1 {
     color:var(--accent);
     text-decoration:none;
 }
-.scan-history{
-    display:block !important;
-    visibility:visible !important;
-}
