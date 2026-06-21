@@ -6,10 +6,29 @@
 </head>
 <body>
 
-<h1>
-  ❤️ My Favorites
-  <span id="favoriteCount"></span>
-</h1>
+<header class="favorites-header">
+
+  <div>
+    <span class="favorites-tag">
+      ❤️ Saved Products
+    </span>
+
+    <h1>
+      My Favorites
+      <span id="favoriteCount"></span>
+    </h1>
+
+    <p>
+      Your saved products are stored on this device.
+    </p>
+  </div>
+
+  <a href="index.html" class="btn-primary">
+    ← Back
+  </a>
+
+</header>
+
 <div id="favoritesList" class="favorite-grid"></div>
 <script>
   function removeFavorite(barcode){
@@ -29,17 +48,33 @@
   location.reload();
 }
 const favorites =
+  JSON.parse(localStorage.getItem("favorites") || "[]");
   document.getElementById("favoriteCount").textContent =
   `(${favorites.length})`;
-  JSON.parse(localStorage.getItem("favorites") || "[]");
-
 const container =
   document.getElementById("favoritesList");
 
 if(!favorites.length){
 
-  container.innerHTML = "<p>No favorites yet</p>";
+container.innerHTML = `
+<div class="empty-favorites">
 
+  <div class="empty-icon">❤️</div>
+
+  <h2>No Favorites Yet</h2>
+
+  <p>
+    Start adding products to your favorites.
+  </p>
+
+  <a href="index.html" class="btn-primary">
+    Browse Products
+  </a>
+
+</div>
+`;
+
+return;
 }else{
 
   container.innerHTML = favorites.map(item => `
