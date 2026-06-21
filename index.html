@@ -68,7 +68,13 @@
   </div>
 
 </div>
+<section class="scan-history">
+  <h3>📜 Recent Scans</h3>
 
+  <div id="scanHistory">
+    No scans yet
+  </div>
+</section>
       <div class="category-nav" aria-label="Categories">
         <button class="category-pill active" data-category="All" type="button">All</button>
         <button class="category-pill" data-category="Barcode Products" type="button">Barcode Products</button>
@@ -153,7 +159,7 @@
       div.textContent = text || "";
       return div.innerHTML;
     }
-
+   renderScanHistory();
    function applySavedTheme() {
 
   let savedTheme = localStorage.getItem("theme");
@@ -492,6 +498,48 @@ menuOverlay.addEventListener("click", function(){
     });
 
 });
+    function saveScan(product){
+
+  let history =
+    JSON.parse(localStorage.getItem("scanHistory") || "[]");
+
+  history = history.filter(item =>
+    item.barcode !== product.barcode
+  );
+
+  history.unshift({
+    name: product.name,
+    barcode: product.barcode
+  });
+
+  history = history.slice(0,10);
+
+  localStorage.setItem(
+    "scanHistory",
+    JSON.stringify(history)
+  );
+
+  renderScanHistory();
+}
+    function renderScanHistory(){
+
+  const history =
+    JSON.parse(localStorage.getItem("scanHistory") || "[]");
+
+  const container =
+    document.getElementById("scanHistory");
+
+  if(!history.length){
+    container.innerHTML = "No scans yet";
+    return;
+  }
+
+  container.innerHTML = history.map(item => `
+    <a href="product.html?barcode=${item.barcode}">
+      ${item.name}
+    </a>
+  `).join("<br>");
+}
   </script>
   <div id="scannerModal" hidden>
   <div id="reader"></div>
@@ -547,6 +595,7 @@ scanBtn.addEventListener("click", async () => {
     scannerModal.hidden = true;
 
     if(product){
+      saveScan(product);
         window.location.href =
           `product.html?barcode=${encodeURIComponent(product.barcode)}`;
     }
