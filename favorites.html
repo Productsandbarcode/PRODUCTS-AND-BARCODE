@@ -6,12 +6,31 @@
 </head>
 <body>
 
-<h1>❤️ My Favorites</h1>
-
-<div id="favoritesList"></div>
-
+<h1>
+  ❤️ My Favorites
+  <span id="favoriteCount"></span>
+</h1>
+<div id="favoritesList" class="favorite-grid"></div>
 <script>
+  function removeFavorite(barcode){
+
+  let favorites =
+    JSON.parse(localStorage.getItem("favorites") || "[]");
+
+  favorites = favorites.filter(
+    item => item.barcode !== barcode
+  );
+
+  localStorage.setItem(
+    "favorites",
+    JSON.stringify(favorites)
+  );
+
+  location.reload();
+}
 const favorites =
+  document.getElementById("favoriteCount").textContent =
+  `(${favorites.length})`;
   JSON.parse(localStorage.getItem("favorites") || "[]");
 
 const container =
@@ -24,13 +43,43 @@ if(!favorites.length){
 }else{
 
   container.innerHTML = favorites.map(item => `
+  <article class="favorite-card">
+
     <a href="product.html?barcode=${item.barcode}">
-      <img src="${item.image}"
-           width="80">
+      <img
+        src="${item.image}"
+        alt="${item.name}"
+        class="favorite-image">
+    </a>
+
+    <div class="favorite-content">
 
       <h3>${item.name}</h3>
-    </a>
-  `).join("");
+
+      <p class="favorite-barcode">
+        📦 ${item.barcode}
+      </p>
+
+      <div class="favorite-actions">
+
+        <a
+          href="product.html?barcode=${item.barcode}"
+          class="btn-primary">
+          View Product
+        </a>
+
+        <button
+          class="btn-danger"
+          onclick="removeFavorite('${item.barcode}')">
+          Remove
+        </button>
+
+      </div>
+
+    </div>
+
+  </article>
+`).join("");
 
 }
 </script>
