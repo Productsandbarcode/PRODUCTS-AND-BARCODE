@@ -153,6 +153,16 @@ favoriteBtn.addEventListener("click", function(){
       : "🤍 Add to Favorites";
 
 });
+  let favorites =
+  JSON.parse(localStorage.getItem("favorites") || "[]");
+
+if(
+  favorites.some(
+    item => item.barcode === product.barcode
+  )
+){
+  favoriteBtn.textContent = "❤️ Added to Favorites";
+}
   document.getElementById("copyBarcodeBtn").onclick = function(){
   navigator.clipboard.writeText(product.barcode);
   alert("Barcode copied!");
