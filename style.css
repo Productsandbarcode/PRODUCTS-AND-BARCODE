@@ -1139,3 +1139,21 @@ h1 {
 #scannerModal[hidden]{
     display:none !important;
 }
+.scan-history{
+    margin-top:30px;
+    padding:20px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:var(--surface);
+}
+
+.scan-history h3{
+    margin-bottom:12px;
+}
+
+#scanHistory a{
+    display:block;
+    padding:8px 0;
+    color:var(--accent);
+    text-decoration:none;
+}
