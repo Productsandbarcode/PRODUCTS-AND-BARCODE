@@ -77,8 +77,6 @@ const favorites =
   JSON.parse(localStorage.getItem("favorites") || "[]");
   document.getElementById("favoriteCount").textContent =
   `(${favorites.length})`;
-  document.getElementById("favoriteTotal").textContent =
-  favorites.length;
 const container =
   document.getElementById("favoritesList");
 
