@@ -135,24 +135,36 @@ if(metaDescription){
 
   document.getElementById("productCategory").textContent =
     product.category;
-  const favoriteBtn = document.getElementById("favoriteBtn");
+const favoriteBtn = document.getElementById("favoriteBtn");
 
-favoriteBtn.addEventListener("click", function(){
+function updateFavoriteButton(){
 
-    toggleFavorite(product);
-
-    let favorites =
+    const favorites =
       JSON.parse(localStorage.getItem("favorites") || "[]");
 
     const isFavorite = favorites.some(
       item => item.barcode === product.barcode
     );
 
-    favoriteBtn.textContent = isFavorite
-      ? "❤️ Added to Favorites"
+    favoriteBtn.innerHTML = isFavorite
+      ? "❤️ Favorited"
       : "🤍 Add to Favorites";
 
+    favoriteBtn.classList.toggle(
+      "favorite-active",
+      isFavorite
+    );
+}
+
+favoriteBtn.addEventListener("click", function(){
+
+    toggleFavorite(product);
+
+    updateFavoriteButton();
+
 });
+
+updateFavoriteButton();
   let favorites =
   JSON.parse(localStorage.getItem("favorites") || "[]");
 
