@@ -103,31 +103,35 @@ if(metaDescription){
     `${product.name} barcode ${product.barcode || ""} category ${product.category || ""}`
   );
 }
-  function toggleFavorite(product){
+function toggleFavorite(product){
 
   let favorites =
     JSON.parse(localStorage.getItem("favorites") || "[]");
 
-  const exists = favorites.find(
-    item => item.barcode === product.barcode
+  const index = favorites.findIndex(
+    item => String(item.barcode) === String(product.barcode)
   );
 
-  if(exists){
-    favorites = favorites.filter(
-      item => item.barcode !== product.barcode
-    );
+  if(index > -1){
+
+    favorites.splice(index,1);
+
   }else{
+
     favorites.push({
       name: product.name,
       barcode: product.barcode,
       image: product.image
     });
+
   }
 
   localStorage.setItem(
     "favorites",
     JSON.stringify(favorites)
   );
+
+  console.log("Favorites Saved:", favorites);
 }
   document.getElementById("productName").textContent =
     product.name.toUpperCase();
@@ -148,11 +152,10 @@ const favoriteBtn =
 
 function updateFavoriteButton(){
 
-    const favorites =
-      JSON.parse(
-        localStorage.getItem("favorites") || "[]"
-      );
-
+    const isFavorite =
+  favorites.some(item =>
+    String(item.barcode) === String(product.barcode)
+  );
     const isFavorite =
       favorites.some(item =>
         item.barcode === product.barcode
@@ -176,16 +179,6 @@ favoriteBtn.addEventListener("click", () => {
 });
 
 updateFavoriteButton();
-  let favorites =
-  JSON.parse(localStorage.getItem("favorites") || "[]");
-
-if(
-  favorites.some(
-    item => item.barcode === product.barcode
-  )
-){
-  favoriteBtn.textContent = "❤️ Added to Favorites";
-}
   document.getElementById("copyBarcodeBtn").onclick = function(){
   navigator.clipboard.writeText(product.barcode);
   alert("Barcode copied!");
