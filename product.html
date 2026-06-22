@@ -156,11 +156,7 @@ function updateFavoriteButton(){
   favorites.some(item =>
     String(item.barcode) === String(product.barcode)
   );
-    const isFavorite =
-      favorites.some(item =>
-        item.barcode === product.barcode
-      );
-
+   
     favoriteBtn.innerHTML =
       isFavorite ? "❤️" : "🤍";
 
