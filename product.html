@@ -149,14 +149,16 @@ function toggleFavorite(product){
     product.category;
 const favoriteBtn =
   document.getElementById("favoriteBtn");
-
 function updateFavoriteButton(){
 
+    const favorites =
+      JSON.parse(localStorage.getItem("favorites") || "[]");
+
     const isFavorite =
-  favorites.some(item =>
-    String(item.barcode) === String(product.barcode)
-  );
-   
+      favorites.some(item =>
+        String(item.barcode) === String(product.barcode)
+      );
+
     favoriteBtn.innerHTML =
       isFavorite ? "❤️" : "🤍";
 
@@ -172,8 +174,11 @@ favoriteBtn.addEventListener("click", () => {
 
     updateFavoriteButton();
 
-});
+    console.log(
+      JSON.parse(localStorage.getItem("favorites"))
+    );
 
+});
 updateFavoriteButton();
   document.getElementById("copyBarcodeBtn").onclick = function(){
   navigator.clipboard.writeText(product.barcode);
